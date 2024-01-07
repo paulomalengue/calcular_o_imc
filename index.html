@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcular o imc</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" type="" href="bootstrap/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+
+
+
+    <style>
+        .img_top {
+            width: 80px;
+        }
+
+        /* Estilos para esconder a modal por padrão */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <img src="assets/finger.png" alt="" class="img_top mt-5">
+        <!-- menu de navegacao -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav" aria-expanded="true"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                by Prag Soluções Tecnológicas
+            </div>
+
+        </nav>
+
+        <h1 id="titulo"></h1>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-info">
+                    <h5 class="display-5">Calcular o IMC com Javascript</h5>
+                </div>
+
+            </div>
+
+        </div>
+        <hr>
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <button type="button" id="btn-teste" class="btn btn-success" data-toggle="modal">
+                    <i class="fa fa-plus-circle"></i> Calcular IMC
+                </button>
+
+                <hr>
+            </div>
+
+        </div>
+        <div class="alert alert-success" id="resultado">resultado...</div>
+
+
+
+
+    </div>
+    <!-- modal -->
+    <!-- Modal -->
+
+
+    <div class="modal fade" id="modal-teste" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-bars"></i> Calcular o IMC
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="">
+
+                        <div class="form-group">
+                            <input type="text" id="nome" class="form-control" placeholder="Nome completo">
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <input type="text" id="peso" class="form-control" placeholder="peso">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" id="altura" class="form-control" placeholder="altura">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <button id="btn-calcular" type="button" class="btn btn-success btn-block">calcular</button>
+                        </div>
+
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+  
+
+
+
+    <script src="bootstrap/jquery-3.2.1.slim.min.js"></script>
+    <!-- <script src="bootstrap/bootstrap.bundle.min.js"></script> -->
+    <script src="bootstrap/popper.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+
+    <script>
+        $(document).on("click", "#btn-teste", function () {
+            $('#modal-teste').modal('show')
+            $("#professor").val("Paulo Malengue")
+        });
+
+
+
+        $("#btn-calcular").on("click", function () {
+
+            var peso = Number($("#peso").val());
+            var altura = Number($("#altura").val());
+            var nome = $("#nome").val();
+            //var resultado = $("#resultado").val();
+            var resultado = document.getElementById('resultado')
+     
+
+            var imc = peso / (altura * altura);
+            imc = imc.toFixed(2);  // Arredonda para duas casas decimais
+
+            var message;
+
+            if (imc < 18.5) {
+                message = nome+": Abaixo do peso.";           
+     
+            } else if (imc <= 25) {
+                message = nome+": Normal.";
+            } else if (imc < 30) {
+                message = nome+": Sobrepeso.";
+            } else if (imc < 35) {
+                message = nome+": Obesidade classe I.";
+    
+            } else if (imc < 40) {
+                message = nome+": Obesidade classe II.";
+            } else {
+                message = nome+": Obesidade classe III.";
+            }
+            resultado.innerText=`${message} o imc é ${imc}`;
+            $('#modal-teste').modal('hide');
+
+            //alert(`${message} O IMC é ${imc}`);
+
+
+        });
+
+        // $(document).on("change", "#opcao", function () {
+        //     var valor = $("#opcao").val();    
+        //     alert('a escolha é: ' + valor)            
+        // });
+
+
+
+
+        //javascript puro
+        //open modal
+        // document.getElementById('btn-add').addEventListener('click',function() {
+        //     $("#modal-add").modal("show");
+
+        //     document.getElementById('ano').value="2024..."
+        // });
+
+        // //edit
+        // document.getElementById('btn-edit').addEventListener('click',function() {
+
+        //     $("#modal-edit").modal("show");
+
+        //     // Atribuir valores aos campos usando JavaScript puro
+        //     document.getElementById('descricao').value = 'Html 5';
+        //     document.getElementById('preco').value = '40.000 kz';
+        //     document.getElementById('duracao').value = '45 dias';           
+        // });
+
+        // document.getElementById('btnUpdade').addEventListener('click',function() {
+        //     //$("#modal-edit").modal("show");
+
+        //     // Obter os valores dos campos usando JavaScript puro
+        //     var descricao = document.getElementById('descricao').value;
+        //     var preco = document.getElementById('preco').value;
+        //     var duracao = document.getElementById('duracao').value;            
+
+        //     // Exibir os valores no alerta
+        //     alert(`Descricao: ${descricao}, Preco: ${preco}, Duracao: ${duracao}`);
+
+        // });
+
+
+
+        // //jquery add
+        // $(document).on("click", "#btn-add", function () {
+        //     $("#modal-add").modal("show");
+
+
+        // });
+
+
+        // //javascript puro
+        // document.getElementById('btn-add').addEventListener('click', function () {
+        //     $("#modal-add").modal("show");
+        //     document.getElementById('professor').value = "Paulo Malengue"
+        // });
+
+
+        //jQuery
+        $(document).on("click", "#btn-teste", function () {
+            $('#modal-teste').modal('show')
+            $("#professor").val("Paulo Malengue")
+        });
+
+
+
+
+        // //edit
+        // $(document).on("click", "#btn-edit", function (e) {
+        //     e.preventDefault();
+        //     $("#modal-edit").modal("show");
+
+        //     $("#descricao").val('React Native');
+        //     $("#preco").val('25');
+        //     $("#duracao").val('3 meses');
+
+        // });
+
+        // // //btnsave
+        // $(document).on("click", "#btnSave", function (e) {
+
+
+        //     var descricao = $("#descricao").val();
+        //     var preco = $("#preco").val();
+        //     var duracao = $("#duracao").val();
+
+        //     // var dados=descricao+preco+duracao;
+        //     var dados = `${descricao}, ${preco}, ${duracao}`;
+        //     alert(`submeteu os dados ${dados}`)
+
+
+        // });
+
+
+    </script>
+</body>
+
+</html>
